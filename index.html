@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velizha Ayu Retnosari, UI/UX Designer and Frontend Developer</title>
+<meta name="description" content="Portfolio of Velizha Ayu Retnosari, UI/UX designer and frontend developer: design projects (Bhumi, Spotify redesign, Sweetheart, Selera Hanani) and web applications built in React and Vue.js.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a plain, readable one-page portfolio. Big type, one accent colour, projects stacked in the order a recruiter will scan them. */
+:root{
+  --bg:#F6F8FA; --surface:#FFFFFF; --ink:#101828; --muted:#475467; --line:#D8DEE6;
+  --brand:#121838; --on-brand:#FFFFFF; --mint:#3ECF8C; --mint-text:#0A7A4E; --tint:#E6F6EE;
+  --maroon:#6B1414; --amber:#F5A623; --amber-tint:#FDF1DC;
+  --shadow:0 10px 30px rgba(16,24,40,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0D1117; --surface:#161B22; --ink:#F2F4F7; --muted:#B4BDC9; --line:#2B3340;
+    --brand:#3ECF8C; --on-brand:#0D1226; --mint-text:#5EE0A5; --tint:#12302A;
+    --maroon:#E58A8A; --amber-tint:#33290F;
+    --shadow:0 10px 30px rgba(0,0,0,.5);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.65 "DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:"Plus Jakarta Sans","DM Sans",system-ui,sans-serif;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+:focus-visible{outline:3px solid var(--mint-text);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* header */
+.site-head{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{font:800 1.2rem "Plus Jakarta Sans",sans-serif;text-decoration:none;letter-spacing:-.01em}
+nav{display:flex;gap:6px}
+nav a{padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:1rem}
+nav a:hover{background:var(--tint)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 24px;border-radius:12px;font:700 1.0625rem "DM Sans",sans-serif;text-decoration:none;border:2px solid var(--brand);transition:transform .15s}
+.btn.primary{background:var(--brand);color:var(--on-brand)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn:hover{transform:translateY(-2px)}
+
+/* hero */
+.hero{background:var(--tint);border-bottom:1px solid var(--line)}
+.hero .wrap{padding-top:64px;padding-bottom:64px}
+.role{display:inline-block;font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mint-text);margin-bottom:14px}
+.hero h1{font-size:clamp(2.6rem,6vw,4.25rem);letter-spacing:-.02em}
+.hero .lede{margin:22px 0 32px;font-size:1.25rem;color:var(--muted);max-width:46ch}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.jump-label{margin:48px 0 14px;font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.thumbs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.thumbs li{display:flex}
+.thumbs a{flex:1;display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:transform .15s}
+.thumbs a:hover{transform:translateY(-4px)}
+.thumbs img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.thumbs .t-name{display:block;padding:14px 16px 0;font:800 1.1rem "Plus Jakarta Sans",sans-serif;line-height:1.2}
+.thumbs .t-type{display:block;padding:2px 16px 16px;color:var(--muted);font-size:1rem}
+.hero h1{max-width:20ch}
+
+/* sections */
+section{padding:72px 0}
+.sec-label{font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+h2{font-size:clamp(1.9rem,4vw,2.75rem);letter-spacing:-.015em}
+
+/* project */
+.project{scroll-margin-top:88px;background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-top:36px}
+.project-top{padding:40px 40px 8px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
+.project-top h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
+.project-top .num{display:inline-block;font:800 .95rem "Plus Jakarta Sans",sans-serif;padding:6px 12px;border-radius:999px;margin-bottom:16px}
+.bhumi .num{background:#121838;color:#3ECF8C}
+.selera .num{background:var(--maroon);color:#FFF}
+@media (prefers-color-scheme: dark){.selera .num{background:#6B1414;color:#FFF}}
+.project-top p{color:var(--muted);margin-top:14px;max-width:46ch}
+.facts{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.facts li{display:flex;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:1.0625rem}
+.facts b{min-width:104px;color:var(--muted);font-weight:500}
+.bar{height:8px}
+.bhumi .bar{background:linear-gradient(90deg,#121838 0 50%,#3ECF8C 50%)}
+.selera .bar{background:linear-gradient(90deg,#6B1414 0 50%,#F5A623 50%)}
+.spotify .num{background:#121212;color:#4ADE80}
+.sweet .num{background:#0E7C78;color:#fff}
+.spotify .bar{background:linear-gradient(90deg,#121212 0 50%,#22C55E 50%)}
+.sweet .bar{background:linear-gradient(90deg,#1BA39C 0 50%,#FFD23F 50%)}
+.pending{margin:32px 40px 8px;padding:44px 24px;border:2px dashed var(--line);border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;color:var(--muted)}
+.pending svg{width:120px;height:auto}
+.pending.sp svg{color:#4B3BB5}
+.pending.sw svg{color:#C2406F}
+.spotify .space{height:32px}
+.code-intro{margin-top:14px;color:var(--muted);max-width:60ch}
+.code .num{background:#172B4D;color:#7DD3FC}
+.code .bar{background:linear-gradient(90deg,#172B4D 0 50%,#12C2F0 50%)}
+.gallery.one{grid-template-columns:1fr}
+.gallery .span2{grid-column:1/-1}
+.gallery:last-child{padding-bottom:36px}
+.code-jump{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.code-jump a{display:inline-block;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-weight:600;font-size:1rem;text-decoration:none}
+.code-jump a:hover{border-color:var(--ink)}
+.code-note{margin-top:14px;color:var(--muted);font-size:1rem;max-width:60ch}
+.gallery{padding:32px 40px 8px;display:grid;grid-template-columns:1fr 1fr;gap:28px 24px;align-items:start}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:18px;border:1px solid var(--line);background:#fff}
+.gallery figcaption{margin-top:10px;font-size:1rem;color:var(--muted);line-height:1.45}
+.gallery figcaption b{display:block;color:var(--ink);font-weight:700}
+.shots{padding:32px 40px 8px;display:grid;gap:20px;align-items:start}
+.shots.four{grid-template-columns:repeat(4,1fr)}
+.shots.sel{grid-template-columns:1fr 1fr 1fr}
+.shots.three{grid-template-columns:repeat(3,1fr)}
+.shots img.dark{border-color:#2B3340;background:#121212}
+.shots figure{margin:0}
+.shots img{width:100%;border-radius:18px;border:1px solid var(--line);background:#fff}
+.shots figcaption{margin-top:10px;font-size:1rem;color:var(--muted);line-height:1.45}
+.shots figcaption b{display:block;color:var(--ink);font-weight:700}
+.stack{display:grid;gap:20px}
+.wide{padding:12px 40px 0}
+.wide img{width:100%;border-radius:18px;border:1px solid var(--line);background:#fff}
+.wide figcaption{margin-top:10px;font-size:1rem;color:var(--muted)}
+.wide figure{margin:0}
+.points{margin:0;padding:28px 40px 40px;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.points li{padding:18px 20px;border-radius:16px;background:var(--bg);border:1px solid var(--line);font-size:1.0625rem}
+.points b{display:block;font-family:"Plus Jakarta Sans",sans-serif;margin-bottom:4px}
+.palette{padding:0 40px 36px}
+.palette img{width:100%;max-width:520px;border-radius:12px;border:1px solid var(--line)}
+.palette p{font-size:1rem;color:var(--muted);margin-top:8px}
+
+/* more projects */
+.more{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
+.cover{position:relative;overflow:hidden;min-height:240px;padding:28px;display:flex;align-items:flex-end;color:#fff}
+.cover h3{font-size:clamp(1.6rem,3vw,2.1rem);position:relative;max-width:14ch}
+.cover svg{position:absolute;right:24px;top:24px;width:min(46%,190px);height:auto}
+.c1 .cover{background:linear-gradient(135deg,#1B1740,#4B3BB5)}
+.c2 .cover{background:linear-gradient(135deg,#A52A5A,#DE6A8D)}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:6px 14px;border-radius:999px;background:var(--tint);color:var(--ink);font-size:1rem;font-weight:500;border:1px solid var(--line)}
+.card-body{padding:24px 28px 28px;display:grid;gap:18px;align-content:start;flex:1}
+.card-body p{color:var(--muted)}
+.card-body .btn{justify-self:start}
+
+/* skills + contact */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start;margin-top:28px}
+.about-text{display:grid;gap:16px}
+.about-text p{color:var(--muted);max-width:56ch}
+.skill-label{margin:32px 0 0;font:800 1.15rem "Plus Jakarta Sans",sans-serif;letter-spacing:-.005em}
+.skills{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skills li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-weight:700}
+.skills span{display:block;font-weight:400;color:var(--muted);font-size:1rem;margin-top:4px}
+.contact{background:var(--brand);color:var(--on-brand);padding:72px 0}
+.contact h2{color:inherit}
+.contact p{margin-top:14px;font-size:1.25rem;opacity:.92;max-width:44ch}
+.contact-cta{margin-top:28px}
+.contact .btn{background:var(--on-brand);color:var(--brand);border-color:var(--on-brand)}
+.contact .btn.outline{background:transparent;color:var(--on-brand)}
+.contact .address{margin-top:18px;font-size:1.0625rem;opacity:.9}
+footer{padding:28px 0 40px;color:var(--muted);font-size:1rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+@media (max-width:900px){
+  .hero .wrap{padding-top:44px;padding-bottom:44px}
+  .thumbs{grid-template-columns:1fr 1fr;gap:16px}
+  .jump-label{margin-top:36px}
+  .project-top{grid-template-columns:1fr;padding:28px 24px 4px}
+  .shots{padding:24px 24px 4px}
+  .pending{margin:24px 24px 4px}
+  .gallery{padding:24px 24px 4px;grid-template-columns:1fr}
+  .shots.four{grid-template-columns:1fr 1fr}
+  .shots.sel{grid-template-columns:1fr 1fr}
+  .shots.three{grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .shots.sel .stack{grid-column:1 / -1;grid-template-columns:1fr 1fr}
+  .wide{padding:12px 24px 0}
+  .points{grid-template-columns:1fr;padding:24px}
+  .palette{padding:0 24px 28px}
+  .more{grid-template-columns:1fr}
+  section{padding:52px 0}
+  .skills{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr;gap:28px}
+}
+@media (max-width:520px){
+  nav{gap:0}
+  nav a{padding:10px 8px;font-size:.92rem}
+  nav a.opt{display:none}
+  .brand{font-size:1rem;line-height:1.2;max-width:8.6em}
+  .shots.four,.shots.sel,.shots.sel .stack{grid-template-columns:1fr 1fr;gap:14px}
+  .shots.three{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .facts li{flex-direction:column;gap:2px}
+  .skills{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.btn,.thumbs a{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top">Velizha Ayu Retnosari</a>
+    <nav aria-label="Main">
+      <a href="#projects">Design</a>
+      <a href="#code">Frontend</a>
+      <a class="opt" href="#about">About</a>
+      <a class="opt" href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="intro">
+        <span class="role">UI/UX Designer and Frontend Developer</span>
+        <h1>Clear, easy-to-use screens for real people.</h1>
+        <p class="lede">I design mobile and web interfaces in Figma, and I build them in code. With 5+ years as a frontend developer, including on a banking application, my screens are practical to build.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See design projects</a>
+          <a class="btn ghost" href="#code">See frontend work</a>
+          <a class="btn ghost" href="#contact">Contact me</a>
+        </div>
+      </div>
+      <p class="jump-label">Design projects</p>
+      <ul class="thumbs">
+        <li><a href="#bhumi"><img src="img/t-bhumi.jpg" alt="" width="480" height="600"><span class="t-name">Bhumi</span><span class="t-type">Mobile app</span></a></li>
+        <li><a href="#spotify"><img src="img/t-spotify.jpg" alt="" width="480" height="600"><span class="t-name">Spotify Redesign</span><span class="t-type">Mobile app concept</span></a></li>
+        <li><a href="#sweetheart"><img src="img/t-sweet.jpg" alt="" width="480" height="600"><span class="t-name">Sweetheart</span><span class="t-type">Website</span></a></li>
+        <li><a href="#selera"><img src="img/t-selera.jpg" alt="" width="480" height="601"><span class="t-name">Selera Hanani</span><span class="t-type">Mobile and desktop</span></a></li>
+      </ul>
+      <p class="jump-label" style="margin-top:36px">Frontend projects</p>
+      <ul class="code-jump" style="margin-top:0" aria-label="Jump to a frontend project">
+        <li><a href="#bds">Branch Delivery System</a></li>
+        <li><a href="#bca">myBCA Syariah Bisnis</a></li>
+        <li><a href="#ecrf">eCRF</a></li>
+        <li><a href="#clinic">Clinic Booking</a></li>
+        <li><a href="#emr">EMR</a></li>
+        <li><a href="#arsip">ArsipSehat</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="wrap">
+      <p class="sec-label">Design work</p>
+      <h2 id="projects-title">Design projects</h2>
+
+      <!-- Project 1: Bhumi -->
+      <article id="bhumi" class="project bhumi" aria-labelledby="bhumi-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Project 01</span>
+            <h2 id="bhumi-title">Bhumi</h2>
+            <p>An eco e-commerce app for second-hand fashion. Every item shows its carbon footprint, and the footprint a buyer saves can be turned into rewards for good causes.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Mobile app, team project</li>
+            <li><b>Covers</b> Research, wireframes, screens</li>
+            <li><b>Testing</b> 5 participants</li>
+            <li><b>Tool</b> Figma</li>
+          </ul>
+        </div>
+        <div class="shots four">
+          <figure><img src="img/b-welcome.png" alt="Bhumi welcome screen" width="360" height="640"><figcaption><b>Welcome</b>Explains the app in one line.</figcaption></figure>
+          <figure><img src="img/b-detail.png" alt="Bhumi product detail screen" width="360" height="983"><figcaption><b>Product</b>Details with the carbon footprint shown.</figcaption></figure>
+          <figure><img src="img/b-checkout.png" alt="Bhumi checkout screen" width="360" height="697"><figcaption><b>Checkout</b>Address, shipping and total in one place.</figcaption></figure>
+          <figure><img src="img/b-rewards.png" alt="Bhumi rewards screen" width="360" height="817"><figcaption><b>Rewards</b>Saved carbon turned into causes to support.</figcaption></figure>
+        </div>
+        <ul class="points">
+          <li><b>The problem</b>People who care about the planet still enjoy shopping, but find it hard to trust second-hand items.</li>
+          <li><b>The approach</b>Show the environmental impact of each purchase and make payment feel safe.</li>
+          <li><b>The check</b>Five people tried the prototype, and their feedback shaped a second round of screens.</li>
+        </ul>
+      </article>
+
+      <!-- Project 2: Spotify redesign -->
+      <article id="spotify" class="project spotify" aria-labelledby="spotify-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Project 02</span>
+            <h2 id="spotify-title">Spotify Music App Redesign</h2>
+            <p>A redesign concept for the Spotify music app, made in Figma: a home screen with friends' activity, a search with tabs, and a podcast page. This is a personal concept project and is not affiliated with Spotify.</p>
+            <a class="btn ghost" style="margin-top:22px" href="https://www.figma.com/design/xkVX2E7dLXY2Z33DDo5Voa/SAILOR-MOON-%F0%9F%A7%9A%F0%9F%8F%BB%E2%80%8D%E2%99%80%EF%B8%8F%E2%9C%A8%F0%9F%A5%BA?node-id=246-7110&amp;t=mD8TOVV3TlNd6ZzL-0" target="_blank" rel="noopener">Open in Figma</a>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Mobile app redesign</li>
+            <li><b>Screens</b> Home, Search, Podcast page</li>
+            <li><b>Look</b> Dark theme, green accents</li>
+            <li><b>Tool</b> Figma</li>
+          </ul>
+        </div>
+        <div class="shots three">
+          <figure><img class="dark" src="img/sp-home.png" alt="Redesigned Spotify home screen with a greeting, friends' listening activity, playlists and recently played items" width="375" height="812"><figcaption><b>Home</b>A personal greeting, what friends are playing, then playlists and recent items.</figcaption></figure>
+          <figure><img class="dark" src="img/sp-search.png" alt="Redesigned Spotify search screen with Music, Podcast and Audiobook tabs, top genres, new releases and moods" width="375" height="1346"><figcaption><b>Search</b>One search bar with Music, Podcast and Audiobook tabs, then genres, new releases and moods.</figcaption></figure>
+          <figure><img class="dark" src="img/sp-podcast.png" alt="Redesigned Spotify podcast page with follow button, topic chips and Episodes and Playlists tabs" width="375" height="812"><figcaption><b>Podcast page</b>Follow, notifications and share, topic tags, and Episodes or Playlists tabs.</figcaption></figure>
+        </div>
+        <ul class="points">
+          <li><b>Friends first</b>See what friends are listening to right at the top of Home.</li>
+          <li><b>Simpler search</b>Music, Podcast and Audiobook sit under one search bar.</li>
+          <li><b>Easy navigation</b>Home, Search and Library stay in a rounded bar at the bottom.</li>
+        </ul>
+      </article>
+
+      <!-- Project 3: Sweetheart -->
+      <article id="sweetheart" class="project sweet" aria-labelledby="sweet-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Project 03</span>
+            <h2 id="sweet-title">Sweetheart</h2>
+            <p>A website for parents and babies. Parents find recipes by baby age, chat with experts, read parenting tips, join forum discussions and discover baby products.</p>
+            <a class="btn ghost" style="margin-top:22px" href="https://www.figma.com/design/NnuYiAIcguR3EsBf6qFdzw/Putri-Yang-Ditukar-%F0%9F%91%A8%F0%9F%8F%BB%F0%9F%91%A9%F0%9F%8F%BB%F0%9F%A7%95%F0%9F%8F%BB%F0%9F%91%A9%F0%9F%8F%BB%E2%80%8D%F0%9F%A6%B1%F0%9F%A7%91%F0%9F%8F%BB%E2%80%8D%F0%9F%A6%B1?node-id=6-5&amp;p=f&amp;t=yESnTaVhTLFsZzZ7-0" target="_blank" rel="noopener">Open in Figma</a>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Website</li>
+            <li><b>Audience</b> Parents of babies</li>
+            <li><b>Features</b> Recipes, expert chat, forum</li>
+            <li><b>Tool</b> Figma</li>
+          </ul>
+        </div>
+        <div class="gallery">
+          <figure><img src="img/sw-hero.jpg" alt="Sweetheart home page with a baby surrounded by fruit, the main message One Right Step to Fulfill your Baby Nutrition and a link to chat with experts" width="1000" height="924"><figcaption><b>Home</b>A bright header with search, one clear message and a shortcut to chat with experts.</figcaption></figure>
+          <figure><img src="img/sw-recipes.jpg" alt="Sweetheart recipe finder with baby age, meal time and main ingredient filters and a carousel of recipes by age" width="1000" height="910"><figcaption><b>Recipe finder</b>Find recipes by baby age, meal time and main ingredient, or browse by age group.</figcaption></figure>
+          <figure><img src="img/sw-parenting.jpg" alt="Sweetheart parenting section titled New to this parenting thing with a family photo" width="1000" height="479"><figcaption><b>Parenting</b>A friendly welcome for new parents, with articles and tips.</figcaption></figure>
+          <figure><img src="img/sw-chat.jpg" alt="Sweetheart section titled Chat with our experts showing a phone with a chat conversation" width="1000" height="624"><figcaption><b>Expert chat</b>Parents talk to nutritionists and lactation consultants in a simple chat.</figcaption></figure>
+          <figure><img src="img/sw-nutrition.jpg" alt="Sweetheart nutrition section with a numbered bottle listing lactose, prebiotics, fats, protein and vitamins" width="1000" height="706"><figcaption><b>Nutrition</b>Tap a number on the bottle to learn about each nutrient.</figcaption></figure>
+          <figure><img src="img/sw-forum.jpg" alt="Sweetheart forum and community section with a list of discussion topics and post counts" width="1000" height="920"><figcaption><b>Forum and community</b>Discussion topics with post counts, plus workshops and events.</figcaption></figure>
+        </div>
+        <ul class="points">
+          <li><b>Recipe finder</b>Three simple filters lead parents to the right recipe.</li>
+          <li><b>Expert chat</b>Help from nutritionists and lactation consultants, one message away.</li>
+          <li><b>Forum and community</b>A place for parents to read, share and ask each other.</li>
+        </ul>
+      </article>
+
+      <!-- Project 4: Selera Hanani (last) -->
+      <article id="selera" class="project selera" aria-labelledby="selera-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Project 04</span>
+            <h2 id="selera-title">Selera Hanani</h2>
+            <p>An online ordering design for a home bakery. Customers browse cakes, pick a product, review their order and reach the shop through a simple subscription form.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Mobile and desktop screens</li>
+            <li><b>Covers</b> Home, products, cart, About, FAQ</li>
+            <li><b>Look</b> Warm maroon and amber</li>
+            <li><b>Tool</b> Figma</li>
+          </ul>
+        </div>
+        <div class="shots sel">
+          <figure><img src="img/sh-home.png" alt="Selera Hanani home screen with a chocolate banner and product categories" width="382" height="878"><figcaption><b>Home</b>Banner first, then product categories.</figcaption></figure>
+          <figure><img src="img/sh-list.png" alt="Selera Hanani product list of roll cakes with order buttons" width="380" height="1040"><figcaption><b>Product list</b>Two-column grid with a clear Pesan (order) button.</figcaption></figure>
+          <div class="stack">
+            <figure><img src="img/sh-detail-t.png" alt="Selera Hanani roll cake detail with packaging, quantity and add to cart" width="381" height="400"><figcaption><b>Detail</b>Packaging, quantity, add to cart.</figcaption></figure>
+            <figure><img src="img/sh-cart-t.png" alt="Selera Hanani cart listing two roll cakes with total Rp 200.000" width="383" height="470"><figcaption><b>Your order</b>Items, total, checkout.</figcaption></figure>
+          </div>
+        </div>
+        <div class="wide">
+          <figure><img src="img/sh-desktop.png" alt="Selera Hanani desktop cart page with product, quantity, price and checkout" width="1158" height="708"><figcaption>The same order flow on desktop.</figcaption></figure>
+        </div>
+        <ul class="points">
+          <li><b>Easy to scan</b>Large product photos and one main action per screen.</li>
+          <li><b>Warm brand feel</b>Maroon for headings, amber for buttons, so actions stand out.</li>
+          <li><b>Works on both</b>Mobile screens plus a desktop version of the cart.</li>
+        </ul>
+        <div class="palette">
+          <img src="img/sh-palette.png" alt="Red and amber colour scales used in the Selera Hanani file" width="940" height="165">
+          <p>Red and amber colour scales from the design file.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="code" aria-labelledby="code-title" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-label">Frontend work</p>
+      <h2 id="code-title">Frontend projects</h2>
+      <p class="code-intro">Screens from web applications I built as a frontend developer. They are screenshots from test environments with sample data. The source code is no longer available.</p>
+      <ul class="code-jump" aria-label="Jump to a frontend project">
+        <li><a href="#bds">Branch Delivery System</a></li>
+        <li><a href="#bca">myBCA Syariah Bisnis</a></li>
+        <li><a href="#ecrf">eCRF</a></li>
+        <li><a href="#clinic">Clinic Booking</a></li>
+        <li><a href="#emr">EMR</a></li>
+        <li><a href="#arsip">ArsipSehat</a></li>
+      </ul>
+
+      <article id="bds" class="project code" aria-labelledby="bds-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Frontend project</span>
+            <h2 id="bds-title">Branch Delivery System</h2>
+            <p>A web application for Bank Muamalat Indonesia that supports branch operations. Staff sign in with a role and then work from a menu of transactions. I maintain and improve it in Vue.js and TypeScript, and I also build its React-based revamp.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Web application for branch staff</li>
+            <li><b>Client</b> Bank Muamalat Indonesia</li>
+            <li><b>My role</b> Frontend developer</li>
+            <li><b>Stack</b> Vue.js, TypeScript (revamp in React)</li>
+          </ul>
+        </div>
+        <div class="gallery">
+          <figure><img src="img/fe-bds-login.jpg" alt="Branch Delivery System sign-in card with username, password, a role dropdown and a Login button" width="1140" height="620"><figcaption><b>Sign in</b>A short form with username, password and a role selector, so each person lands in the right part of the system.</figcaption></figure>
+          <figure><img src="img/fe-bds-home.jpg" alt="Branch Delivery System home screen with a purple side menu listing transaction types and a banner about branch teller services" width="1400" height="639"><figcaption><b>Home and menu</b>A purple side menu groups the work by transaction: cash deposit, cash withdrawal, book transfer, SKN and RTGS transfer, tax, virtual account, BPJS and petty cash.</figcaption></figure>
+        </div>
+      </article>
+
+      <article id="bca" class="project code" aria-labelledby="bca-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Frontend project</span>
+            <h2 id="bca-title">myBCA Syariah Bisnis</h2>
+            <p>The sign-in and admin screens of a business internet banking website for BCA Syariah. After login, company staff manage users, accounts, approvals, reports and messages from a side menu.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Business internet banking website</li>
+            <li><b>Client</b> BCA Syariah</li>
+            <li><b>My role</b> Frontend developer</li>
+            <li><b>Language</b> Bahasa Indonesia</li>
+          </ul>
+        </div>
+        <div class="gallery">
+          <figure class="span2"><img src="img/fe-bca-login.jpg" alt="myBCA Syariah Bisnis login page with company ID, user ID and key code fields, a reCAPTCHA, a Login button and a promotion banner" width="1400" height="733"><figcaption><b>Login page</b>Three labelled fields, a reCAPTCHA and one large Login button. Privacy Policy, FAQ, Security Tips and Tutorial links sit on the right, with contact details below.</figcaption></figure>
+          <figure><img src="img/fe-bca-home.jpg" alt="myBCA Syariah Bisnis home page with a side menu and a welcome message above a table of company details" width="1400" height="733"><figcaption><b>Home</b>A welcome message and a table of company details, with the main menu on the left: user settings, account list, transaction limit, approvals, reports and messages.</figcaption></figure>
+          <figure><img src="img/fe-bca-users.jpg" alt="Manage users page with a table, search box, Add button and a session expired message in a red-headed dialog" width="1400" height="733"><figcaption><b>Manage users</b>A table with a search box and an Add button. A clear red-headed dialog tells the user that the session has ended and asks them to sign in again.</figcaption></figure>
+        </div>
+      </article>
+
+      <article id="ecrf" class="project code" aria-labelledby="ecrf-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Frontend project</span>
+            <h2 id="ecrf-title">eCRF (Electronic Case Report Form)</h2>
+            <p>A web system for PharmaMetricLabs, built with Vue.js, that helps collect clinical research data. Staff keep track of studies and set up a new study in a form.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Web application for clinical research</li>
+            <li><b>Client</b> PharmaMetricLabs</li>
+            <li><b>My role</b> Frontend developer</li>
+            <li><b>Built with</b> Vue.js</li>
+          </ul>
+        </div>
+        <div class="gallery">
+          <figure><img src="img/fe-ecrf-list.jpg" alt="eCRF studies page with a green side menu and a table listing study number, sponsor, investigator, period and status" width="1400" height="681"><figcaption><b>Studies list</b>A table of ongoing studies with search, status labels and a Manage Study button on each row. Green is used for the main actions and an orange label shows the study is in progress.</figcaption></figure>
+          <figure><img src="img/fe-ecrf-new.jpg" alt="Add New eCRF form with fields for study number, drug, sponsors, doctors, coordinators and dates" width="1400" height="681"><figcaption><b>Add a new eCRF</b>A long form in a dialog. Fields are grouped, the buttons to pick doctors and coordinators sit side by side, and red messages show which fields are required.</figcaption></figure>
+        </div>
+      </article>
+
+      <article id="clinic" class="project code" aria-labelledby="clinic-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Frontend project</span>
+            <h2 id="clinic-title">Clinic Booking Website</h2>
+            <p>A website where patients book a clinic appointment, built with React.js and Material-UI. The screens are from a demo clinic and focus on simple scheduling and an easy checkout.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Patient booking website</li>
+            <li><b>Made for</b> Demo Carevo Clinic</li>
+            <li><b>My role</b> Frontend developer</li>
+            <li><b>Built with</b> React.js, Material-UI</li>
+          </ul>
+        </div>
+        <div class="gallery">
+          <figure class="span2"><img src="img/fe-clinic-home.jpg" alt="Clinic website home page with a large headline, a Book Appointment button and a photo of a doctor with a patient" width="1400" height="680"><figcaption><b>Home</b>A large headline, a short line of text and a Make an Appointment button, with the main pages in the top menu.</figcaption></figure>
+          <figure><img src="img/fe-clinic-doctors.jpg" alt="Clinic booking page with a doctor search box and cards for each consultation type" width="1400" height="680"><figcaption><b>Choose a consultation</b>A search box and cards for each type of consultation, with three short reasons to book online above them.</figcaption></figure>
+          <figure><img src="img/fe-clinic-about.jpg" alt="About page with the clinic mission and three icons for qualified doctors, integrity and customer first" width="1400" height="682"><figcaption><b>About the clinic</b>The clinic mission and three values, each with a large icon.</figcaption></figure>
+          <figure class="span2"><img src="img/fe-clinic-checkout.jpg" alt="Checkout section showing the selected consultation, price, payment method and promo code fields" width="1400" height="365"><figcaption><b>Checkout</b>The chosen consultation, a payment method list, a promo code button and a clear total.</figcaption></figure>
+        </div>
+      </article>
+
+      <article id="emr" class="project code" aria-labelledby="emr-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Frontend project</span>
+            <h2 id="emr-title">EMR (Electronic Medical Record)</h2>
+            <p>The home screen of a doctor’s workspace, powered by Carevo. A doctor sees the patient who is waiting, the next patient and a calendar of consultations.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Web application for doctors</li>
+            <li><b>Brand</b> Carevo</li>
+            <li><b>My role</b> Frontend developer</li>
+            <li><b>Screens</b> Doctor home</li>
+          </ul>
+        </div>
+        <div class="gallery one">
+          <figure><img src="img/fe-emr-home.jpg" alt="EMR doctor home page with cards for the waiting patient and the next patient, a calendar and the schedule for the selected day" width="1400" height="564"><figcaption><b>Doctor home</b>Two cards for the waiting and next patient, a month calendar and the schedule for the chosen day. Empty states use a small picture and a short line of text, and a blue notice explains how the Skip button works.</figcaption></figure>
+        </div>
+      </article>
+
+      <article id="arsip" class="project code" aria-labelledby="arsip-title">
+        <div class="bar"></div>
+        <div class="project-top">
+          <div>
+            <span class="num">Frontend project</span>
+            <h2 id="arsip-title">ArsipSehat Backoffice</h2>
+            <p>A backoffice website for a health platform. Staff sign in and manage the platform's content and services from one menu.</p>
+          </div>
+          <ul class="facts">
+            <li><b>Type</b> Web admin dashboard</li>
+            <li><b>Company</b> Diacon Medica Teknologi (Carevo)</li>
+            <li><b>My role</b> Frontend developer</li>
+            <li><b>Base</b> Open-source admin theme by Creative Tim</li>
+          </ul>
+        </div>
+        <div class="gallery one">
+          <figure><img src="img/fe-login.jpg" alt="ArsipSehat backoffice sign-in page with email, password, remember me and a Sign In button" width="1400" height="680"><figcaption><b>Sign in</b>A simple login with email, password and a remember me option.</figcaption></figure>
+          <figure><img src="img/fe-articles.jpg" alt="ArsipSehat backoffice article list with a side menu and view, edit and delete buttons for each article" width="1400" height="682"><figcaption><b>Article management</b>A table of articles with view, edit and delete buttons, a New Article button and a side menu for the other sections.</figcaption></figure>
+        </div>
+        <ul class="points">
+          <li><b>Many sections</b>The side menu covers articles, medical services, doctors, bookings, community and promo codes.</li>
+          <li><b>Clear actions</b>Each row has icon buttons for view, edit and delete, with delete in red.</li>
+          <li><b>Language switch</b>A language selector sits at the top right, next to the user name.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-title" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-label">About me</p>
+      <h2 id="about-title">Design and code, together</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I am a UI/UX designer trained at Binar Academy and a frontend developer with 5+ years of experience in React, Vue.js, JavaScript and TypeScript.</p>
+          <p>I currently work on a banking application and its React-based revamp, turning design and technical requirements into reusable components, multi-step forms and API-driven workflows. I prototype and check feasibility directly in HTML, CSS and JavaScript.</p>
+          <p>I work in English and Bahasa Indonesia.</p>
+        </div>
+        <ul class="facts">
+          <li><b>Now</b> Frontend Developer, Bank Muamalat Indonesia (since March 2024)</li>
+          <li><b>Before</b> Frontend Developer, Carevo (2021 to 2023)</li>
+          <li><b>Training</b> UI/UX Designer, Binar Academy (2021)</li>
+          <li><b>Looking for</b> UI/UX Designer or Frontend Developer roles</li>
+          <li><b>Languages</b> Bahasa Indonesia, English (B2)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-title" style="padding-top:0">
+    <div class="wrap">
+      <p class="sec-label">What I do</p>
+      <h2 id="skills-title">Skills</h2>
+      <h3 class="skill-label">Design</h3>
+      <ul class="skills">
+        <li>Wireframing<span>Flows and low-fidelity screens</span></li>
+        <li>High-fidelity design<span>Mobile and web UI in Figma</span></li>
+        <li>Prototyping<span>Clickable flows and quick HTML, CSS and JavaScript prototypes</span></li>
+      </ul>
+      <h3 class="skill-label">Frontend</h3>
+      <ul class="skills">
+        <li>Languages<span>HTML, CSS, SASS, JavaScript, TypeScript</span></li>
+        <li>Frameworks<span>React and Vue.js</span></li>
+        <li>UI and state<span>Material UI, Redux Toolkit</span></li>
+        <li>API integration<span>REST API, Axios, TanStack Query</span></li>
+        <li>Forms and data<span>React Hook Form, Zod, ExcelJS</span></li>
+        <li>Tooling<span>Docker, Nginx</span></li>
+      </ul>
+      <h3 class="skill-label">Working with teams</h3>
+      <ul class="skills">
+        <li>Design requirements<span>Turning business and technical needs into screens</span></li>
+        <li>Banking workflows<span>Multi-step forms and transaction status flows</span></li>
+        <li>Backend collaboration<span>Connecting user-facing screens to server-side logic</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<div class="contact" id="contact">
+  <div class="wrap">
+    <h2>Let's work together</h2>
+    <p>I am open to UI/UX designer and frontend developer roles. Get in touch to talk about how I can help.</p>
+    <div class="cta contact-cta">
+      <a class="btn" href="mailto:velizhaar@gmail.com">Email me</a>
+      <a class="btn outline" href="https://www.linkedin.com/in/velizhaar/" target="_blank" rel="noopener">LinkedIn profile</a>
+      <a class="btn outline" href="https://github.com/velizhaar" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="address">velizhaar@gmail.com</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Velizha Ayu Retnosari, UI/UX Designer and Frontend Developer</span>
+    <span>Bhumi illustrations: Doodles by Pablo Stanley. Icons: Iconify. Album and podcast artwork in the Spotify concept belongs to its owners.</span>
+  </div>
+</footer>
+
+</body>
+</html>
