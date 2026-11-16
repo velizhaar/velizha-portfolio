@@ -13,7 +13,7 @@ Any static host works. On Vercel, import this repository, set the framework pres
 ## What is inside
 
 - **Design projects:** Bhumi, Spotify Music App Redesign (concept), Sweetheart, Selera Hanani.
-- **Frontend projects:** Branch Delivery System, myBCA Syariah Bisnis, eCRF, Clinic Booking Website, EMR, ArsipSehat Backoffice. These are screenshots from test environments with sample data. The source code is no longer available.
+- **Frontend projects:** Branch Delivery System, Branch Delivery System Revamp (React 19), myBCA Syariah Bisnis, eCRF, Clinic Booking Website, EMR, ArsipSehat Backoffice. These are screenshots from test environments with sample data. The source code is no longer available.
 
 ## Credits
 
